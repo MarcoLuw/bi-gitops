@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infra-tools
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/MarcoLuw/bi-gitops
+        revision: HEAD
+        directories:
+          - path: apps/*    # All infra and service apps
+  template:
+    metadata:
+      name: '{{path.basename}}'
+      namespace: argocd
+    spec:
+      source:
+        repoURL: https://github.com/MarcoLuw/bi-gitops
+        targetRevision: HEAD
+        path: apps/{{path.basename}}
+        helm:
+          valueFiles:
+            - values.yaml
+          dependencyUpdate: true  # 👈 Ensures public chart gets downloaded
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

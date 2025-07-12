@@ -1,1 +1,1 @@
-# bi-gitops
+# Gitops for BI project
