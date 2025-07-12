@@ -21,7 +21,6 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-          dependencyUpdate: true  # 👈 Ensures public chart gets downloaded
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{path.basename}}'
