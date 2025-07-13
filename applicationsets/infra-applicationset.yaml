@@ -12,23 +12,21 @@ spec:
         repoURL: https://github.com/MarcoLuw/bi-gitops
         revision: HEAD
         directories:
-          - path: apps/*    # All infra and service apps
+          # - path: apps/*    # All infra and service apps
+          - path: apps/*/overlays/dev
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{path[1]}}-{{path.basename}}'
       namespace: argocd
     spec:
       project: default
       source:
         repoURL: https://github.com/MarcoLuw/bi-gitops
         targetRevision: HEAD
-        path: apps/{{path.basename}}
-        helm:
-          valueFiles:
-            - values.yaml
+        path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{path.basename}}'
+        namespace: '{{path[1]}}'
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
