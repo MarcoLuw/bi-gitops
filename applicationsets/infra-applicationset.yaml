@@ -4,6 +4,9 @@ metadata:
   namespace: argocd
   name: infra-tools
 spec:
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy
   generators:
     - git:
         repoURL: https://github.com/MarcoLuw/bi-gitops
