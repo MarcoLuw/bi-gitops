@@ -4,4 +4,4 @@ resources:
   - ../../base
 
 patchesStrategicMerge:
-  - keycloak-patch.yaml
+  - keycloak-sts-patch.yaml
