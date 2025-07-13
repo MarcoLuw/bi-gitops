@@ -1,11 +1,3 @@
-# Global PostgreSQL settings
-global:
-  postgresql:
-    auth:
-      username: bn_keycloak
-      password: bn_keycloak
-      database: bitnami_keycloak
-
 # Keycloak Admin User Configuration
 auth:
   adminUser: admin
