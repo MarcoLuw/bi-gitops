@@ -4,4 +4,5 @@ helmCharts:
   - name: keycloak
     version: 24.7.7
     repository: https://charts.bitnami.com/bitnami
-    releaseName: keycloak
+    values:
+      - values.yaml
