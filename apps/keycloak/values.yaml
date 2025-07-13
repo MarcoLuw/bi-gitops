@@ -1,7 +1,7 @@
 # Keycloak Admin User Configuration
 auth:
-  adminUser: admin
-  adminPassword: admin
+  adminUser: "admin"
+  adminPassword: "admin"
 
 # PostgreSQL Specific Configuration
 postgresql:
