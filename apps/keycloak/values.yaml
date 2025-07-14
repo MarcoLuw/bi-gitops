@@ -1,29 +1,30 @@
 # Keycloak Admin User Configuration
-auth:
-  adminUser: "admin"
-  adminPassword: "admin"
-
-# PostgreSQL Specific Configuration
-postgresql:
-  enabled: true
+keycloak:
   auth:
-    username: bn_keycloak
-    password: bn_keycloak
-    database: bitnami_keycloak
+    adminUser: "admin"
+    adminPassword: "admin"
 
-# Kubernetes Service Configuration
-service:
-  type: ClusterIP
-  ports:
-    http: 80
+  # PostgreSQL Specific Configuration
+  postgresql:
+    enabled: true
+    auth:
+      username: bn_keycloak
+      password: bn_keycloak
+      database: bitnami_keycloak
 
-# Additional Keycloak Environment Variables
-extraEnvVars:
-  - name: KC_HOSTNAME_STRICT
-    value: "false"
-  - name: KC_HTTP_ENABLED
-    value: "true"
-  - name: VERTX_WORKER_POOL_SIZE
-    value: "20"
-  - name: VERTX_EVENT_LOOP_POOL_SIZE
-    value: "8"
+  # Kubernetes Service Configuration
+  service:
+    type: ClusterIP
+    ports:
+      http: 80
+
+  # Additional Keycloak Environment Variables
+  extraEnvVars:
+    - name: KC_HOSTNAME_STRICT
+      value: "false"
+    - name: KC_HTTP_ENABLED
+      value: "true"
+    - name: VERTX_WORKER_POOL_SIZE
+      value: "20"
+    - name: VERTX_EVENT_LOOP_POOL_SIZE
+      value: "8"
