@@ -1,0 +1,10 @@
+---
+- name: Config Web Server
+  hosts: web                  # Match the [web] group in the inventory ([web]) - host ip to run the playbook against
+  become: yes                 # run tasks with elevated privileges on the remote host (sudo)
+  vars:
+    ansible_ssh_private_key_file: "~/.ssh/id_rsa"   # Path to your SSH private key - ansible will use this to connect to the EC2 instance
+  tasks:        # Define the tasks to be executed on the web server
+    - name: Include Web Server Role
+      import_role:  # Import tasks from roles/webserver
+        name: webserver
