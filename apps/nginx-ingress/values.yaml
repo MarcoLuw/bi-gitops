@@ -1,0 +1,15 @@
+ingress-nginx:
+  controller:
+    ingressClassResource:
+      name: nginx
+    ingressClass: nginx
+    service:
+      loadBalancerClass: ""
+      type: LoadBalancer
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
