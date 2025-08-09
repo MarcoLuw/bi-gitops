@@ -13,6 +13,8 @@ spec:
         revision: HEAD
         directories:
           - path: apps/*    # All infra and service apps
+          - path: apps/gitea
+            exclude: true  # Exclude Gitea app
   template:
     metadata:
       name: '{{path.basename}}'
