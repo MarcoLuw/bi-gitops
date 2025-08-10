@@ -6,7 +6,6 @@ ingress-nginx:
     service:
       loadBalancerClass: ""
       type: LoadBalancer
-      loadBalancerIP: 13.55.214.81
     resources:
       limits:
         cpu: 200m
@@ -24,4 +23,4 @@ argocdIngress:
   host: argo.andre.demoroute53.com
   serviceName: argocd-server
   servicePort: 80
-  tlsSecretName: argocd-ingress-tls
+  tlsSecretName: argocd-secret
