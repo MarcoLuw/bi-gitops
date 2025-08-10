@@ -7,6 +7,7 @@ spec:
   acme:
     email: {{ .Values.clusterIssuers.stg.email | quote }}
     server: {{ .Values.clusterIssuers.stg.server | quote }}
+    profile: {{ .Values.clusterIssuers.stg.profile | quote }}
     privateKeySecretRef:
       name: {{ .Values.clusterIssuers.stg.name }}
     solvers:
@@ -24,6 +25,7 @@ spec:
   acme:
     email: {{ .Values.clusterIssuers.prd.email | quote }}
     server: {{ .Values.clusterIssuers.prd.server | quote }}
+    profile: {{ .Values.clusterIssuers.prd.profile | quote }}
     privateKeySecretRef:
       name: {{ .Values.clusterIssuers.prd.name }}
     solvers:

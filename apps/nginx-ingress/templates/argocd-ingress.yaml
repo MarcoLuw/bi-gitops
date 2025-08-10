@@ -5,7 +5,6 @@ metadata:
   name: argocd-ingress
   namespace: {{ .Values.argocdIngress.namespace | default "argocd" | quote }}
   annotations:
-    kubernetes.io/ingress.class: {{ .Values.argocdIngress.ingressClassName | default "nginx" | quote }}
     cert-manager.io/cluster-issuer: {{ .Values.argocdIngress.clusterIssuer | quote }}
 spec:
   ingressClassName: {{ .Values.argocdIngress.ingressClassName | default "nginx" | quote }}
@@ -23,5 +22,5 @@ spec:
   tls:
   - hosts:
     - {{ .Values.argocdIngress.host | quote }}
-    # secretName: {{ .Values.argocdIngress.tlsSecretName | default "argocd-secret" | quote }}
+    secretName: {{ .Values.argocdIngress.tlsSecretName | default "argocd-ingress-tls" | quote }}
 {{- end }}

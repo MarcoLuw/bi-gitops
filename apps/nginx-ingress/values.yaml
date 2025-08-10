@@ -23,4 +23,4 @@ argocdIngress:
   host: argo.andre.demoroute53.com
   serviceName: argocd-server
   servicePort: 80
-  tlsSecretName: argocd-secret
+  tlsSecretName: argocd-ingress-tls
