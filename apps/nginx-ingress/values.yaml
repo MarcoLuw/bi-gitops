@@ -13,3 +13,14 @@ ingress-nginx:
       requests:
         cpu: 100m
         memory: 128Mi
+
+# Custom: This is the configuration for the ArgoCD Ingress
+argocdIngress:
+  enabled: true
+  namespace: argocd
+  ingressClassName: nginx
+  clusterIssuer: lets-encrypt-stg
+  host: argo.andre.demoroute53.com
+  serviceName: argocd-server
+  servicePort: 80
+  tlsSecretName: argocd-server-tls

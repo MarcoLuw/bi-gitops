@@ -1,0 +1,33 @@
+{{- if .Values.clusterIssuers.stg.enabled }}
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: {{ .Values.clusterIssuers.stg.name }}
+spec:
+  acme:
+    email: {{ .Values.clusterIssuers.stg.email | quote }}
+    server: {{ .Values.clusterIssuers.stg.server | quote }}
+    privateKeySecretRef:
+      name: {{ .Values.clusterIssuers.stg.name }}
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: {{ .Values.solver.ingressClassName | quote }}
+{{- end }}
+{{- if .Values.clusterIssuers.prd.enabled }}
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: {{ .Values.clusterIssuers.prd.name }}
+spec:
+  acme:
+    email: {{ .Values.clusterIssuers.prd.email | quote }}
+    server: {{ .Values.clusterIssuers.prd.server | quote }}
+    privateKeySecretRef:
+      name: {{ .Values.clusterIssuers.prd.name }}
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: {{ .Values.solver.ingressClassName | quote }}
+{{- end }}

@@ -1,0 +1,27 @@
+{{- if.Values.argocdIngress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-ingress
+  namespace: {{ .Values.argocdIngress.namespace | default "argocd" | quote }}
+  annotations:
+    kubernetes.io/ingress.class: {{ .Values.argocdIngress.ingressClassName | default "nginx" | quote }}
+    cert-manager.io/cluster-issuer: {{ .Values.argocdIngress.clusterIssuer | quote }}
+spec:
+  ingressClassName: {{ .Values.argocdIngress.ingressClassName | default "nginx" | quote }}
+  rules:
+  - host: {{ .Values.argocdIngress.host | quote }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.argocdIngress.serviceName | default "argocd-server" | quote }}
+            port:
+              number: {{ .Values.argocdIngress.servicePort | default 80 }}  # HTTP, since TLS is terminated at ingress
+  tls:
+  - hosts:
+    - {{ .Values.argocdIngress.host | quote }}
+    secretName: {{ .Values.argocdIngress.tlsSecretName | default "argocd-server-tls" | quote }}
+{{- end }}

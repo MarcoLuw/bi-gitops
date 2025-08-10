@@ -1,0 +1,14 @@
+clusterIssuers:
+  stg:
+    enabled: true
+    name: lets-encrypt-stg
+    email: hanhdn2002@gmail.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+  prd:
+    enabled: false
+    name: lets-encrypt-prd
+    email: hanhdn2002@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+
+solver:
+  ingressClassName: nginx
