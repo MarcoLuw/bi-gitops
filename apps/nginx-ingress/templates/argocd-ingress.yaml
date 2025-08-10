@@ -23,5 +23,5 @@ spec:
   tls:
   - hosts:
     - {{ .Values.argocdIngress.host | quote }}
-    secretName: {{ .Values.argocdIngress.tlsSecretName | default "argocd-secret" | quote }}
+    # secretName: {{ .Values.argocdIngress.tlsSecretName | default "argocd-secret" | quote }}
 {{- end }}
