@@ -10,10 +10,10 @@ spec:
     profile: {{ .Values.clusterIssuers.stg.profile | quote }}
     privateKeySecretRef:
       name: {{ .Values.clusterIssuers.stg.name }}
-    solvers:
-      - http01:
-          ingress:
-            ingressClassName: {{ .Values.solver.ingressClassName | quote }}
+    # solvers:
+    #   - http01:
+    #       ingress:
+    #         ingressClassName: {{ .Values.solver.ingressClassName | quote }}
 {{- end }}
 {{- if .Values.clusterIssuers.prd.enabled }}
 ---
