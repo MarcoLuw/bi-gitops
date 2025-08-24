@@ -1,0 +1,1 @@
+# ElastiCache Redis module variables
