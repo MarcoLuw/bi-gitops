@@ -1,4 +1,6 @@
 # common files
+*.txt
+*.out
 
 # Terraform state
 *.tfstate
