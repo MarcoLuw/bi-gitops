@@ -24,6 +24,14 @@ variable "db_cidrs" { # 3 cidrs (db)
   type        = list(string)
   default     = []
 }
+
+### Profile
+variable "iam_instance_profile" {
+  description = "IAM instance profile to attach to the EC2 instances so that they can access AWS services"
+  type        = string
+  default     = ""
+} # instance profile name for EC2 instances
+
 #####
 variable "domain_zone_id" {
   description = "Route53 hosted zone ID for the domain"
@@ -35,10 +43,22 @@ variable "record_name" {
   type        = string
   default     = "" # e.g. "app.example.com"
 }
+variable "record_type" {
+  description = "DNS record type (A, CNAME, etc.)"
+  type        = string
+  default     = "A"
+}
 variable "certificate_arn" {
   description = "ARN of the ACM certificate for the ALB"
   type        = string
   default     = "" # e.g. "arn:aws:acm:us-east-1:123456
+}
+
+###
+variable "private_zone_name" {
+  description = "Name of the private hosted zone for internal DNS"
+  type        = string
+  default     = "" # e.g. "internal.dev.example.com"
 }
 
 #####
@@ -69,4 +89,17 @@ variable "kms_key_id" {
   description = "KMS Key ID for encrypting RDS storage"
   type        = string
   default     = "" # e.g. "arn:aws:kms:us-east-1:123456:key/abcd-efgh-ijkl"
+}
+
+#### Secrets Manager key names for EC2 instances to retrieve at startup
+variable "app_userdata_secret_keys" {
+  description = "Secrets Manager key names for app EC2 instances to retrieve at startup"
+  type        = string
+  default     = "" # e.g. "dev/primary/app_userdata"
+}
+
+variable "web_userdata_secret_keys" {
+  description = "Secrets Manager key names for web EC2 instances to retrieve at startup"
+  type        = string
+  default     = "" # e.g. "dev/primary/web_userdata"
 }

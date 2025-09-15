@@ -4,6 +4,11 @@ variable "name" {
     type        = string
 }
 
+variable "vpc_id" {
+    description = "The ID of the VPC"
+    type        = string
+}
+
 variable "internal" {
     description = "Whether the ALB is internal or internet-facing"
     type        = bool
@@ -30,6 +35,12 @@ variable "certificate_arn" {
     description = "ARN of the ACM certificate for the HTTPS listener (required if listener_https is true)"
     type        = string
     default     = ""         # default: empty string
+}
+
+variable "target_group_port" {
+    description = "The port on which the target group is listening"
+    type        = number
+    default     = 80
 }
 
 variable "target_type" {

@@ -26,12 +26,6 @@ variable "instance_class" {
     default     = "db.t3.micro"   # default: db.t3.micro
 }
 
-variable "multi_az" {
-    description = "Whether to create a Multi-AZ RDS instance"
-    type        = bool
-    default     = true      # prod-like default
-}
-
 variable "allocated_storage" {
     description = "The allocated storage in GB for the RDS instance"
     type        = number
@@ -71,4 +65,10 @@ variable "kms_key_id" {
     description = "The KMS key ID for encrypting the RDS instance (if not provided, default AWS RDS KMS key is used)"
     type        = string
     default     = ""        # default: empty string
+}
+
+variable "multi_az" {
+    description = "Whether to create a Multi-AZ RDS instance"
+    type        = bool
+    default     = true      # prod-like default
 }

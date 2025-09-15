@@ -20,16 +20,28 @@ variable "node_type" {
     default     = "cache.t3.micro"   # default: cache.t3.micro
 }
 
-variable "replicas_per_shard" {
-    description = "The number of read replicas to create per shard"
-    type        = number
-    default     = 1     # default: 1 replica per shard
-}
-
 variable "automatic_failover" {
     description = "Whether to enable automatic failover for the Redis cluster"
     type        = bool
     default     = true      # prod-like default
+}
+
+variable "num_cache_clusters" {
+    description = "Number of cache clusters (nodes) when cluster mode is disabled"
+    type        = number
+    default     = 2     # default: 2 nodes  - primary + replica
+}
+
+variable "num_node_groups" {
+  description = "Number of node groups (shards) when cluster mode is enabled"
+  type        = number
+  default     = 2
+}
+
+variable "replicas_per_shard" {
+    description = "The number of read replicas to create per shard"
+    type        = number
+    default     = 1     # default: 1 replica per shard
 }
 
 variable "multi_az" {
@@ -38,8 +50,8 @@ variable "multi_az" {
     default     = true      # prod-like default
 }
 
-variable "num_cache_clusters" {
-    description = "The number of cache clusters (nodes) in the Redis cluster"
-    type        = number
-    default     = 2     # default: 2 nodes  - primary + replica
+variable "cluster_mode" {
+    description = "Whether to enable cluster mode (sharding)"
+    type        = bool
+    default     = false     # default: disabled (single shard)
 }

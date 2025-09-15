@@ -19,7 +19,7 @@ output "app_ec2_sg_id" {
     value = aws_security_group.app_sg.id
 }
 
-output "reids_sg_id" {
+output "redis_sg_id" {
     description = "Security Group ID for Redis/ElastiCache"
     value = aws_security_group.redis_sg.id
 }
