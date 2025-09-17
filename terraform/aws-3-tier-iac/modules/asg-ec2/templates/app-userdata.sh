@@ -5,8 +5,11 @@
 sudo yum update && sudo yum upgrade
 sudo yum install -y nmap-ncat
 sudo yum install git -y
+
 # install uv - python package manager
-curl -LsSf https://astral.sh/uv/install.sh | sh	
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source /root/.local/bin/env
+
 # install docker
 sudo yum install -y docker
 sudo systemctl enable docker
@@ -34,6 +37,25 @@ export API_ONLY_MODE=True
 export NGINX_BASIC_AUTH_USERNAME=${NGINX_BASIC_AUTH_USERNAME}
 export NGINX_BASIC_AUTH_PASSWORD=${NGINX_BASIC_AUTH_PASSWORD}
 export REDIS_PASSWORD=${REDIS_PASSWORD}
+
+cat <<EOF > .env
+RAILWAY_API_TOKEN_=${RAILWAY_API_TOKEN_}
+GOOGLE_GEMINI_API_KEY=${GOOGLE_GEMINI_API_KEY}
+DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
+API_GITHUB_TOKEN=${API_GITHUB_TOKEN}
+BUCKET_BACKUP="mcp-backup"
+BUCKET_NAME="mcp-catalog"
+SUPABASE_ENDPOINT_URL=${SUPABASE_ENDPOINT_URL}
+SUPABASE_REGION=${SUPABASE_REGION}
+BUCKET_ACCESS_KEY_ID=${BUCKET_ACCESS_KEY_ID}
+BUCKET_ACCESS_KEY_SECRET=${BUCKET_ACCESS_KEY_SECRET}
+INTERNAL_API_KEY=${INTERNAL_API_KEY}
+DOPPLER_TOKEN=${DOPPLER_TOKEN}
+API_ONLY_MODE=True
+NGINX_BASIC_AUTH_USERNAME=${NGINX_BASIC_AUTH_USERNAME}
+NGINX_BASIC_AUTH_PASSWORD=${NGINX_BASIC_AUTH_PASSWORD}
+REDIS_PASSWORD=${REDIS_PASSWORD}
+EOF
 
 # Clone git project
 export GIT_REPO_PATH=${GIT_REPO_PATH}

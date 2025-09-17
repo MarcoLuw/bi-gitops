@@ -157,7 +157,7 @@ module "asg_web" {
   desired_capacity           = 2
   min_size                   = 2
   max_size                   = 4
-  instance_type              = "t3.micro"
+  instance_type              = "t3.medium"
   enable_detailed_monitoring = false
 
   # User data configuration

@@ -5,11 +5,16 @@
 sudo yum update -y && sudo yum upgrade -y
 sudo yum install git -y
 
-# install nvm - node package manager
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-source ~/.bashrc
-nvm install --lts
-nvm use --lts
+# # install nvm - node package manager
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+# source ~/.bashrc
+# nvm install --lts
+# nvm use --lts
+
+# install node
+curl -fsSL https://rpm.nodesource.com/setup_22.x -o nodesource_setup.sh
+bash nodesource_setup.sh
+yum install -y nodejs
 
 # Clone git project
 export GIT_REPO_PATH=${GIT_REPO_PATH}
@@ -28,6 +33,7 @@ npm install
 # Setup environment
 export NEXT_PUBLIC_API_URL="${NEXT_PUBLIC_API_URL}/api/v1"
 export NEXT_PUBLIC_API_KEY=${NEXT_PUBLIC_API_KEY}
+
 
 # Start app
 #npm run build
