@@ -56,7 +56,7 @@ module "sg" {
   # alb_app_sg_ingress_cidrs = var.public_cidrs                   # sg (web tier) allowed to access ALB app SG
   alb_web_port = 80
   alb_app_port = 80
-  web_port     = 3000
+  web_port     = 80 # nginx reverse proxy
   app_port     = 8000
   redis_port   = 6379
   db_port      = 5432
@@ -106,7 +106,7 @@ module "alb_web" {
   internal           = false
   subnet_ids         = module.networking.public_subnet_ids
   security_group_ids = [module.sg.alb_web_sg_id]
-  target_group_port  = 3000
+  target_group_port  = 80 # nginx reverse proxy port
   # certificate_arn = var.certificate_arn     # optional ACM certificate ARN for HTTPS listener
   # listener_https = true               # optional HTTPS listener on port 443
   # target_type = "instance"          # ALB target type: instance, ip, or lambda
@@ -164,10 +164,11 @@ module "asg_web" {
   user_data_template = "web-userdata.sh"
   user_data_vars = {
     # "NEXT_PUBLIC_API_URL" = "app.${var.private_zone_name}"
-    "API_GITHUB_TOKEN"    = local.app_userdata_secrets["API_GITHUB_TOKEN"]
-    "GIT_REPO_PATH"       = local.app_userdata_secrets["GIT_REPO_PATH"]
-    "NEXT_PUBLIC_API_URL" = try(module.route53_private_zone.alias_record_name, "") != "" ? "http://${module.route53_private_zone.alias_record_name}" : "http://app.${var.private_zone_name}"
-    "NEXT_PUBLIC_API_KEY" = local.app_userdata_secrets["INTERNAL_API_KEY"]
+    "API_GITHUB_TOKEN"     = local.app_userdata_secrets["API_GITHUB_TOKEN"]
+    "GIT_REPO_PATH"        = local.app_userdata_secrets["GIT_REPO_PATH"]
+    "NEXT_PUBLIC_API_URL"  = "http://${module.route53_record.record_fqdn}/api/v1"
+    "NEXT_PUBLIC_API_KEY"  = local.app_userdata_secrets["INTERNAL_API_KEY"]
+    "INTERNAL_APP_ALB_DNS" = try(module.route53_private_zone.alias_record_name, "") != "" ? "http://${module.route53_private_zone.alias_record_name}" : "http://app.${var.private_zone_name}"
   }
   # user_data_base64           = "" # optional pre-encoded user data (takes precedence over template)
 

@@ -55,7 +55,7 @@ resource "aws_autoscaling_group" "this" {
     
     launch_template {
         id      = aws_launch_template.this.id
-        version = "$Latest"
+        version = aws_launch_template.this.latest_version #"$Latest"
     }
 
     target_group_arns         = var.target_group_arns
@@ -68,6 +68,16 @@ resource "aws_autoscaling_group" "this" {
         key                 = "Name"
         value               = "${var.name}-ec2"
         propagate_at_launch = true
+    }
+
+    instance_refresh {
+      strategy = "Rolling"
+      preferences {
+        min_healthy_percentage = 0   # replace all instances at once
+        instance_warmup        = 50
+        skip_matching          = false
+      }
+      triggers = ["launch_template"]
     }
 
     lifecycle {
